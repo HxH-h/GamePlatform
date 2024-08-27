@@ -13,5 +13,6 @@ public class Message {
     public static final String GETCODE_FAILURE = "获取验证码失败";
     public static final String CODE_ERROR = "验证码错误";
     public static final String FORMAT_ERROR = "格式错误";
+    public static final String GETINFO_SUCCESS = "获取信息成功";
 
 }

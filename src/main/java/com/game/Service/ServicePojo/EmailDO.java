@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class EmailVO {
+public class EmailDO {
     private String []to;
     private String subject;
     private String content;

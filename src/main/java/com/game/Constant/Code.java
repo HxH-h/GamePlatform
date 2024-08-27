@@ -13,6 +13,7 @@ public class Code {
     public static final Integer LOGIN_SUCCESS = 1001;
     public static final Integer REGISTER_SUCCESS = 1011;
     public static final Integer GETCODE_SUCCESS = 1021;
+    public static final Integer GETINFO_SUCCESS = 1031;
         //失败
     public static final Integer LOGIN_FAILURE = 2001;
     public static final Integer CODE_ERROR = 2011;

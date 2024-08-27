@@ -1,7 +1,5 @@
 package com.game.Controller.Interceptor;
 
-import com.game.Controller.Response.Result;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.game.Constant.Code;
 import com.game.Constant.Message;
 import com.game.Controller.UserInfoThread;
@@ -28,7 +26,7 @@ public class LoginIntercepter implements HandlerInterceptor {
             UserInfoThread.setInfo(uuid);
 
         } catch (Exception e) {
-            System.out.println("拦截请求" + request.getRequestURI());
+            System.out.println("token错误 "+"拦截请求" + request.getRequestURI());
             throw new LoginException(Code.NEEDLOGIN,Message.NEEDLOGIN);
         }
 

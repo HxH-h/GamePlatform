@@ -14,6 +14,7 @@ public class Player {
     String email;
     String addtime;
     int level;
+    int score;
     int isProhibit;
     String photo;
 }

@@ -1,6 +1,7 @@
 package com.game.Service;
 
 import com.game.Controller.ControllerPojo.LoginDTO;
+import com.game.Controller.ControllerPojo.PlayerVO;
 import com.game.Controller.ControllerPojo.RegisterDTO;
 import com.game.CusException.LoginException;
 import com.game.CusException.RegisterException;
@@ -13,5 +14,6 @@ public interface PlayerService {
     String login(LoginDTO loginDTO) throws LoginException ;
     void register(RegisterDTO registerDTO) throws RegisterException;
     void getCode(String email);
+    PlayerVO getPlayerInfo();
 
 }

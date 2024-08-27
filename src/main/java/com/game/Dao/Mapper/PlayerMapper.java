@@ -1,5 +1,6 @@
 package com.game.Dao.Mapper;
 
+import com.game.Controller.ControllerPojo.PlayerVO;
 import com.game.Dao.Pojo.Player;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -17,6 +18,8 @@ public interface PlayerMapper {
     @Select("select uuid from player where username = #{username} or email = #{email}")
     String []playerExsit(String username, String email);
 
-    @Insert("insert into player(uuid, username, password, email, photo, addtime, isProhibit, level) values(#{uuid}, #{username}, #{password}, #{email}, #{photo}, #{addtime}, #{isProhibit}, #{level})")
+    @Insert("insert into player(uuid, username, password, email, photo, addtime, isProhibit, level,score) values(#{uuid}, #{username}, #{password}, #{email}, #{photo}, #{addtime}, #{isProhibit}, #{level} , #{score})")
     void addPlayer(Player player);
+
+    PlayerVO getPlayerInfo(String uuid);
 }

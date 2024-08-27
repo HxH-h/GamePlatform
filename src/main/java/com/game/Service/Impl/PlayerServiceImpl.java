@@ -4,13 +4,15 @@ import com.game.Constant.Code;
 import com.game.Constant.Message;
 import com.game.Constant.RedisConstant;
 import com.game.Controller.ControllerPojo.LoginDTO;
+import com.game.Controller.ControllerPojo.PlayerVO;
 import com.game.Controller.ControllerPojo.RegisterDTO;
+import com.game.Controller.UserInfoThread;
 import com.game.CusException.LoginException;
 import com.game.CusException.RegisterException;
 import com.game.Dao.Mapper.PlayerMapper;
 import com.game.Dao.Pojo.Player;
 import com.game.Service.PlayerService;
-import com.game.Service.ServicePojo.EmailVO;
+import com.game.Service.ServicePojo.EmailDO;
 import com.game.Utils.EmailUtils;
 import com.game.Utils.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +65,8 @@ public class PlayerServiceImpl implements PlayerService {
     public void register(RegisterDTO registerDTO) throws RegisterException {
         //校对验证码
         String code = (String)redisTemplate.opsForValue().get(RedisConstant.IndentityCode + registerDTO.getEmail());
-        if (registerDTO.getCode().equals(code)){
+
+        if (code != null && code.equals(registerDTO.getCode())){
 
             redisTemplate.delete(RedisConstant.IndentityCode + registerDTO.getEmail());
 
@@ -88,6 +91,7 @@ public class PlayerServiceImpl implements PlayerService {
                                           .email(registerDTO.getEmail())
                                           .addtime(format)
                                           .level(0)
+                                          .score(0)
                                           .isProhibit(0)
                                           .photo(null)
                                           .build();
@@ -114,7 +118,13 @@ public class PlayerServiceImpl implements PlayerService {
         }
 
         redisTemplate.opsForValue().set(RedisConstant.IndentityCode + email, code,expire, TimeUnit.MINUTES);
-        EmailUtils.sendEmail(new EmailVO(new String[]{email}, "验证码", "您的验证码是：" + code));
+        EmailUtils.sendEmail(new EmailDO(new String[]{email}, "验证码", "您的验证码是：" + code + "，请在" + expire + "分钟内完成验证。"));
 
+    }
+
+    @Override
+    public PlayerVO getPlayerInfo() {
+        String uuid = UserInfoThread.getInfo();
+        return playerMapper.getPlayerInfo(uuid);
     }
 }

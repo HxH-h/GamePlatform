@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.game.Dao.Mapper.PlayerMapper">
+    <select id="getPlayerInfo" resultType="com.game.Controller.ControllerPojo.PlayerVO">
+        SELECT username , email ,
+        (
+        SELECT COUNT(uuid)
+        FROM player
+        WHERE score >= p.score
+        ) AS `rank`,
+        CASE
+        WHEN level = 0 THEN '新手'
+        WHEN level = 1 THEN '普通用户'
+        WHEN level = 2 THEN '熟练'
+        WHEN level = 3 THEN '老手'
+        END AS `level`, photo
+        from player p
+        WHERE uuid = #{uuid}
+    </select>
+
+
+
+</mapper>

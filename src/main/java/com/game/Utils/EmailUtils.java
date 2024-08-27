@@ -1,6 +1,6 @@
 package com.game.Utils;
 
-import com.game.Service.ServicePojo.EmailVO;
+import com.game.Service.ServicePojo.EmailDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -23,7 +23,7 @@ public class EmailUtils {
         EmailUtils.javaMailSender = javaMailSender;
     }
 
-    public static void sendEmail(EmailVO email){
+    public static void sendEmail(EmailDO email){
 
         SimpleMailMessage message = new SimpleMailMessage();
         //谁发的

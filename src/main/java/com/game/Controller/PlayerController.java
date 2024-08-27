@@ -3,6 +3,7 @@ package com.game.Controller;
 import com.game.Constant.Code;
 import com.game.Constant.Message;
 import com.game.Controller.ControllerPojo.LoginDTO;
+import com.game.Controller.ControllerPojo.PlayerVO;
 import com.game.Controller.ControllerPojo.RegisterDTO;
 import com.game.Controller.Response.Result;
 import com.game.CusException.LoginException;
@@ -14,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@Tag(name = "玩家登录")
+@Tag(name = "玩家操作")
 @RequestMapping("/player")
 public class PlayerController {
 
@@ -41,6 +42,13 @@ public class PlayerController {
     public Result genCode(@PathVariable String email){
         playerServiceImpl.getCode(email);
         return new Result<>(Code.GETCODE_SUCCESS, Message.GETCODE_SUCCESS);
+    }
+
+    @GetMapping("/getPlayerInfo")
+    @Operation(summary = "获取玩家信息")
+    public Result<PlayerVO> getPlayerInfo(){
+        PlayerVO playerInfo = playerServiceImpl.getPlayerInfo();
+        return new Result<>(Code.GETINFO_SUCCESS, Message.GETINFO_SUCCESS, playerInfo);
     }
 
 
